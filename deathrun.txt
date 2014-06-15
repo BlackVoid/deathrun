@@ -1,0 +1,7 @@
+"Gamemode"
+{
+	"base"		"base"
+	"title"		"Deathrun"
+	"maps"		"^dr_|^deathrun_"
+	"menusystem"	"1"
+}
