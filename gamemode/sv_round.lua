@@ -68,11 +68,12 @@ function GM:MapVoteCheck( round )
 				self.NextMap = option.id
 			end)
 		else
-			self.VoteNextRound = !hook.Call("StartMapVote", self)
+			local ret = hook.Call("StartMapVote", self)
+			self.VoteNextRound = (ret == nil and false or ret)
 		end
 	elseif self.ForceChange or round == self.RoundLimit:GetInt()+1 then
 		local tmp = hook.Call("MapVoteNext", self)
-		if tmp then self.NextMap = tmp end
+		if tmp != nil then self.NextMap = tmp end
 		
 		if self.NextMap != "" then
 			RunConsoleCommand("changelevel", self.NextMap)
