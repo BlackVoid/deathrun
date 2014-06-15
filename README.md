@@ -64,7 +64,7 @@ Feel free to modify and send pull requests.
     end
 
 ## 3. License
-Deathrun has been released under the MIT Open Source license.  All contributors agree to transfer ownership of their code to Felix Gustavsson for release under this license.
+Deathrun has been released under the MIT Open Source license, unless otherwise mentioned.  All contributors agree to transfer ownership of their code to Felix Gustavsson for release under this license.
 
 ### 3.1 The MIT License
 
