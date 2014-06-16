@@ -49,6 +49,9 @@ function GM:CreateTeams( )
 	TEAM_RUN 	= 1
 	TEAM_DEATH 	= 2
 
+	-- Alias
+	TEAM_RUNNER = TEAM_RUN
+
 	team.SetUp( TEAM_RUN, "Citizen", Color( 20, 20, 200 ), true )
 	team.SetSpawnPoint( TEAM_RUN, "info_player_counterterrorist" )
 	team.SetClass( TEAM_RUN, { "runner" } )
