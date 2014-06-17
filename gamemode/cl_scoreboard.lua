@@ -231,7 +231,7 @@ local SCORE_BOARD =
 		self.Death:SetWidth( 340 )
 		self.Death:SetContentAlignment( 2 )
 		self.Death:SetExpensiveShadow( 2, Color( 0, 0, 0, 200 ) )
-		self.Death:SetText("Combine")
+		self.Death:SetText(GAMEMODE.DeathP)
 
 		self.Runners = self.Header:Add( "DLabel" )
 		self.Runners:SetFont( "ScoreboardTeams" )
@@ -241,7 +241,7 @@ local SCORE_BOARD =
 		self.Runners:SetWidth( 340 )
 		self.Runners:SetContentAlignment( 5 )
 		self.Runners:SetExpensiveShadow( 2, Color( 0, 0, 0, 200 ) )
-		self.Runners:SetText("Citizens")
+		self.Runners:SetText(GAMEMODE.RunnerP)
 
 		--self.NumPlayers = self.Header:Add( "DLabel" )
 		--self.NumPlayers:SetFont( "ScoreboardDefault" )

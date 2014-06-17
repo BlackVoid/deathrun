@@ -64,7 +64,7 @@ function GM:HUDDrawButtons()
 				alpha = 255-(distance-100)*2.55
 			end
 
-			local text = v.owner and "Claimed by '" .. v.owner:Nick() .. "'."  or "Press C to claim trap."
+			local text = IsValid(v.owner) and "Claimed by '" .. v.owner:Nick() .. "'."  or "Press C to claim trap."
 			local font = "DR_HudTargetID"
 
 			surface.SetFont( font )

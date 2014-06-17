@@ -81,8 +81,8 @@ function PANEL:Paint()
 	end
 
 	-- Round/Game info text
-	draw.SimpleText( "Combine - " .. team.GetScore(TEAM_DEATH), "FuturisticHudScore", centerx-170, 22, Color(255, 255, 255, 255) , TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER )
-	draw.SimpleText( "Citizens - " .. team.GetScore(TEAM_RUN), "FuturisticHudScore", centerx+170, 22, Color(255, 255, 255, 255) , TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER )
+	draw.SimpleText( GAMEMODE.DeathP .. " - " .. team.GetScore(TEAM_DEATH), "FuturisticHudScore", centerx-170, 22, Color(255, 255, 255, 255) , TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER )
+	draw.SimpleText( GAMEMODE.RunnerP .. " - " .. team.GetScore(TEAM_RUN), "FuturisticHudScore", centerx+170, 22, Color(255, 255, 255, 255) , TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER )
 	draw.SimpleText( "Round " .. math.max(1, GAMEMODE:GetRound()) .. " of " .. GAMEMODE.RoundLimit:GetInt(), "FuturisticHudText", centerx, 22, Color(255, 255, 255, 255) , TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER )
 
 	draw.SimpleText( (TimeLeft<0 and "00:00" or PolyGen:FormatSeconds(TimeLeft)), "FuturisticHudTimer", centerx, 80, (TimeLeft<=60 and Color(255, 0, 0, 255) or Color(255, 255, 255, 255)) , TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER )
