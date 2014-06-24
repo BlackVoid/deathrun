@@ -74,6 +74,7 @@ function GM:MapVoteCheck( round )
 	elseif self.ForceChange or round == self.RoundLimit:GetInt()+1 then
 		local tmp = hook.Call("MapVoteNext", self)
 		if tmp != nil then self.NextMap = tmp end
+		if tmp == false then return end
 		
 		if self.NextMap != "" then
 			RunConsoleCommand("changelevel", self.NextMap)
