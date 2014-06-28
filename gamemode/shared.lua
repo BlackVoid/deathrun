@@ -40,7 +40,7 @@ GM.RoundPreStartTime = CreateConVar("dr_round_pre_start", 1, FCVAR_REPLICATED, "
 GM.InitSpawnLength = CreateConVar("dr_initial_spawn_length", 30, FCVAR_REPLICATED, "Seconds a player can spawn after round start.")
 
 GM.MinPlayers = CreateConVar("dr_minimum_players", 2, FCVAR_REPLICATED, "Minimum players for the game to start.")
-GM.PlayerToDeathRatio = CreateConVar("dr_player_to_death_ratio", 8, FCVAR_REPLICATED, "Ratio between death and player count.")
+GM.PlayerToCombineRatio = CreateConVar("dr_player_to_combine_ratio", 8, FCVAR_REPLICATED, "Ratio between death and player count.")
 
 GM.RealisticFallDamage = CreateConVar("dr_realistic_fall_damage", 1, FCVAR_REPLICATED, "Damage based on speed.")
 GM.CanOnlySpectateOwnTeam = CreateConVar("dr_spectate_own_team_only", 1, FCVAR_REPLICATED, "If 0 both teams can spectate each other.")
@@ -50,6 +50,25 @@ GM.CoinsPerKill = CreateConVar("dr_currency_per_kill", 20, FCVAR_REPLICATED, "Ho
 
 GM.ValidSpectatorModes = { OBS_MODE_CHASE, OBS_MODE_IN_EYE, OBS_MODE_ROAMING } -- Spectator states
 GM.ValidSpectatorEntities = { "player" } -- Which entities can be spectated
+
+-- Weapons replaced
+GM.weapons = {
+	"weapon_ak47",
+	"weapon_aug",
+	"weapon_awp",
+	"weapon_deagle",
+	"weapon_elite",
+	"weapon_glock",
+	"weapon_m3",
+	"weapon_m4a1",
+	"weapon_m249",
+	"weapon_mp5navy",
+	"weapon_p90",
+	"weapon_scout",
+	"weapon_sg552",
+	"weapon_usp",
+	"weapon_xm1014"
+}
 
 
 function GM:CreateTeams( )
@@ -71,6 +90,10 @@ end
 weapons.Register({Base = "dr_secret"}, "weapon_knife", false)
 weapons.Register({Base = "dr_secret"}, "weapon_smokegrenade", false)
 weapons.Register({Base = "dr_secret"}, "weapon_flashbang", false)
+
+for k,v in pairs(GM.weapons) do
+	scripted_ents.Register({Base = "weapon_spawner"}, v, false)
+end
 
 GM.ReverseModelList = {}
 for k,v in pairs(player_manager:AllValidModels()) do

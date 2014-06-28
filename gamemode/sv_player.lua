@@ -158,7 +158,7 @@ net.Receive("DeathRun_SelectTeam", function (length, ply)
 		ply:KillSilent()
 		ply:Spectate(OBS_MODE_ROAMING)
 		if GAMEMODE.InitSpawn then
-			local NrDeath = math.ceil( #GAMEMODE:GetActivePlayers()/GAMEMODE.PlayerToDeathRatio:GetInt() )
+			local NrDeath = math.ceil( #GAMEMODE:GetActivePlayers()/GAMEMODE.PlayerToCombineRatio:GetInt() )
 			if #team.GetPlayers( TEAM_DEATH ) < NrDeath then
 				ply:SetTeam( TEAM_DEATH )	
 				player_manager.SetPlayerClass( ply, "death" )

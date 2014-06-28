@@ -17,7 +17,7 @@ Feel free to modify and send pull requests.
     dr_round_pre_start (default: 1) - Seconds between spawn and round start.
     dr_initial_spawn_length (default: 30) - Seconds a player can spawn after round start (if no one has died).
     dr_minimum_players (default: 2) - Minimum players for the game to start.
-    dr_player_to_death_ratio (default: 8) - Ratio between death and player count.
+    dr_player_to_combine_ratio (default: 8) - Ratio between combine and player count.
     dr_realistic_fall_damage (default: 1) - Damage based on speed.
     dr_spectate_own_team_only (default: 1) - If 0 both teams can spectate each other.
     dr_currency_per_round (default: 75) - How much currency each player on the winning team gets.
