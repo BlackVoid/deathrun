@@ -26,6 +26,7 @@ function GM:CanStartRound()
 	return false
 end
 
+-- Should be rewritten at some point.
 function GM:MapVoteCheck( round )
 	if (round == self.RoundLimit:GetInt()-4 or self.VoteNextRound) and self.NextMap == "" then
 		if BVVote then
@@ -98,38 +99,6 @@ function GM:MapVoteCheck( round )
 	end
 end
 
-function GM:ReplaceWeapons()
-	local weapons = {
-		"weapon_ak47",
-		"weapon_aug",
-		"weapon_awp",
-		"weapon_deagle",
-		"weapon_elite",
-		"weapon_glock",
-		"weapon_m3",
-		"weapon_m4a1",
-		"weapon_m249",
-		"weapon_mp5navy",
-		"weapon_p90",
-		"weapon_scout",
-		"weapon_sg552",
-		"weapon_usp",
-		"weapon_xm1014"
-	}
-
-	local replacing = {}
-	for k,v in pairs(weapons) do
-		replacing = table.Add(replacing, ents.FindByClass(v))
-	end
-	
-	for _,wep in ipairs(replacing) do
-		local spawner = ents.Create("weapon_spawner")
-		spawner:SetPos(wep:GetPos())
-		spawner:Spawn()
-		wep:Remove()
-	end
-end
-
 function GM:OnPreRoundStart( num )
 	if hook.Call("CanStartRound", self) == false then
 		if self:GetGameState() != STATE_WAITING_FOR_PLAYERS then
@@ -143,15 +112,13 @@ function GM:OnPreRoundStart( num )
 	self:SetGameState(STATE_ROUND_IN_PROGRESS)
 	game.CleanUpMap()
 
-	self:ReplaceWeapons()
-
 	local AllPlayers = self:GetActivePlayers()
 	local NrActivePlayers = #AllPlayers
 	local PreviousDeath = team.GetPlayers(TEAM_DEATH)
 
 	if NrActivePlayers >= self.MinPlayers:GetInt() then
 		
-		local NrDeath = math.ceil( NrActivePlayers/self.PlayerToDeathRatio:GetInt() )
+		local NrDeath = math.ceil( NrActivePlayers/self.PlayerToCombineRatio:GetInt() )
 		local count=0
 		for _, v in RandomPairs( AllPlayers ) do
 			if count < NrDeath && !table.HasValue(PreviousDeath, v) then
