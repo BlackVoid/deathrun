@@ -9,7 +9,16 @@ Citizens before they can reach the end.
 
 Feel free to modify and send pull requests.
 
-## 1. Convars:
+## 1. Mapvote
+
+It's recommended to download a mapvote system, so players can vote which map they want to play, below are both free and paid voting systems confirmed to work out of the box with the gamemode. If you have made a mapvote system that works with this gamemode feel free to contact me to get it added to the list.
+
+### 1.1 Free
+
+* [BlackVoid Vote](https://github.com/BlackVoid/blackvoidvote) 
+
+
+## 2. Convars:
 
     dr_round_limit (default: 10) - Total rounds per map
     dr_round_length (default: 420) - Round length in seconds.
@@ -23,7 +32,7 @@ Feel free to modify and send pull requests.
     dr_currency_per_round (default: 75) - How much currency each player on the winning team gets.
     dr_currency_per_kill (default: 20) - How much currency a player gets per kill with a weapon.
 
-## 2. Hooks:
+## 3. Hooks:
 
 **Clientside:**
 
@@ -51,22 +60,16 @@ Feel free to modify and send pull requests.
         return true or false
     end
 
-    -- Called to start map vote
-    -- Return if mapvote creation was successful
-    function GM:StartMapVote()
-        return true or false
-    end
-
     -- Called when next map should be loaded
-    -- Return next map as string excluding ".bsp"
+    -- Return next map as string excluding ".bsp" or false for addon to handle mapchange.
     function GM:MapVoteNext()
         return "deathrun_atomic_warfare"
     end
 
-## 3. License
+## 4. License
 Deathrun has been released under the MIT Open Source license, unless otherwise mentioned.  All contributors agree to transfer ownership of their code to Felix Gustavsson for release under this license.
 
-### 3.1 The MIT License
+### 4.1 The MIT License
 
 Copyright (C) 2014 Felix Gustavsson and contributors.
 

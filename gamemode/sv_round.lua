@@ -26,59 +26,13 @@ function GM:CanStartRound()
 	return false
 end
 
--- Should be rewritten at some point.
 function GM:MapVoteCheck( round )
-	if (round == self.RoundLimit:GetInt()-4 or self.VoteNextRound) and self.NextMap == "" then
-		if BVVote then
-			local Maps = {}
-			for _,v in ipairs({"dr_", "deathrun_"}) do
-				local files, directories = file.Find( "maps/" .. v .. "*.bsp", "GAME" )
-				for k,_ in ipairs(files) do
-					files[k] = string.Left(files[k], #files[k]-4)
-				end
-				table.Add(Maps, files)
-			end
-
-			local Options = {}
-			for k,v in RandomPairs(Maps) do
-				if #Options >= 5 then break end
-				if v == game.GetMap() then continue end
-				local map = table.concat(string.Explode("_", v), " ", 2)
-				Options[#Options+1] = {["id"] = v, ["value"] = map}
-			end
-
-			self.VoteNextRound = !BVVote.StartVote(player.GetAll(), "Next map", Options , 30, function(plTbl, option)
-				if Themis then
-					Themis:ChatBroadcast(
-						{"LineIcon", "Global"},
-						Color(0,150,0),
-						option.value,
-						Color(255,255,255),
-						" won with ",
-						Color(0,150,0),
-						tostring(option.votes),
-						Color(255,255,255),
-						" vote" .. (option.votes > 1 and "s" or "") .."."
-					)
-				else
-					for k, ply in pairs( player.GetAll() ) do
-						ply:ChatPrint( option.value .. " won with " .. tostring(option.votes) .. " vote" .. (option.votes > 1 and "s" or "") .."." )
-					end
-				end
-
-				self.NextMap = option.id
-			end)
-		else
-			local ret = hook.Call("StartMapVote", self)
-			self.VoteNextRound = (ret == nil and false or ret)
-		end
-	elseif self.ForceChange or round == self.RoundLimit:GetInt()+1 then
-		local tmp = hook.Call("MapVoteNext", self)
-		if tmp != nil then self.NextMap = tmp end
-		if tmp == false then return end
+	if round == self.RoundLimit:GetInt()+1 then
+		local map = hook.Call("MapVoteNext", self)
+		if map == false then return end
 		
-		if self.NextMap != "" then
-			RunConsoleCommand("changelevel", self.NextMap)
+		if map != nil then
+			RunConsoleCommand("changelevel", map)
 			return
 		else
 			local Maps = {}
