@@ -72,7 +72,7 @@ GM.weapons = {
 
 
 function GM:CreateTeams( )
-	TEAM_RUN 	= 1
+	TEAM_RUN 	= 3
 	TEAM_DEATH 	= 2
 
 	-- Alias
