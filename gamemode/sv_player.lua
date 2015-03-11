@@ -49,6 +49,8 @@ function GM:DoPlayerDeath(ply, attacker, dmginfo)
 			attacker:ThemisShop_GiveCoins(self.CoinsPerKill:GetInt())
 		elseif PS then
 			attacker:PS_GivePoints(self.CoinsPerKill:GetInt())
+		elseif Pointshop2 then
+			attacker:PS2_AddStandardPoints(self.CoinsPerKill:GetInt())
 		end
 	end
 end

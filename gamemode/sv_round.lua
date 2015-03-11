@@ -108,6 +108,10 @@ function GM:OnRoundEnd(winner)
 			for k,v in pairs(team.GetPlayers(winner)) do
 				v:PS_GivePoints(self.CoinsPerRound:GetInt())
 			end
+		elseif Pointshop2 then
+			for k,v in pairs(team.GetPlayers(winner)) do
+				v:PS2_AddStandardPoints(self.CoinsPerRound:GetInt())
+			end
 		end
 	end
 
