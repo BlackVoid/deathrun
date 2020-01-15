@@ -8,6 +8,9 @@ include("sh_util.lua")
 include("cl_targetid.lua")
 include("cl_scoreboard.lua")
 
+include("classes/death.lua")
+include("classes/runner.lua")
+
 include("vgui/fonts.lua")
 include("vgui/polygenerator.lua")
 include("vgui/fhud.lua")
