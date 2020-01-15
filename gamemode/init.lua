@@ -11,6 +11,9 @@ AddCSLuaFile("sh_playermeta.lua")
 AddCSLuaFile("cl_targetid.lua")
 AddCSLuaFile("cl_scoreboard.lua")
 
+AddCSLuaFile("classes/death.lua")
+AddCSLuaFile("classes/runner.lua")
+
 AddCSLuaFile("vgui/fonts.lua")
 AddCSLuaFile("vgui/polygenerator.lua")
 AddCSLuaFile("vgui/fhud.lua")
