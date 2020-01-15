@@ -62,6 +62,7 @@ end
 
 function PANEL:Paint()
 	if not LocalPlayer() or not IsValid(LocalPlayer()) then return end
+	local player = LocalPlayer()
 	draw.NoTexture()
 	surface.SetDrawColor( 0, 0, 0, 200 )
 	surface.DrawPoly( self.Combine )
@@ -97,9 +98,9 @@ function PANEL:Paint()
 	surface.DrawPoly( self.AmmoInfo )
 
 	-- Ammo text
-	if IsValid(LocalPlayer():GetActiveWeapon()) and LocalPlayer():GetActiveWeapon().Clip1 and LocalPlayer():GetActiveWeapon():Clip1() >= 0 then
-		local wep = LocalPlayer():GetActiveWeapon()
-		draw.SimpleText( wep:Clip1() .. " / " .. LocalPlayer():GetAmmoCount(wep:GetPrimaryAmmoType()), "FuturisticHudAmmo", self:GetWide()-65, self:GetTall()-18, Color(255, 255, 255, 255) , TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER )
+	if IsValid(player:GetActiveWeapon()) and player:GetActiveWeapon().Clip1 and player:GetActiveWeapon():Clip1() >= 0 then
+		local wep = player:GetActiveWeapon()
+		draw.SimpleText( wep:Clip1() .. " / " .. player:GetAmmoCount(wep:GetPrimaryAmmoType()), "FuturisticHudAmmo", self:GetWide()-65, self:GetTall()-18, Color(255, 255, 255, 255) , TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER )
 	else
 		draw.SimpleText( "- / -", "FuturisticHudAmmo", self:GetWide()-65, self:GetTall()-18, Color(255, 255, 255, 255) , TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER )
 	end
@@ -109,7 +110,7 @@ function PANEL:Paint()
 	surface.DrawPoly( self.SpecInfo )
 	surface.DrawPoly( self.HealthInfo )
 
-	self.CurHealth = math.Clamp(Lerp( 0.05, self.CurHealth, ((LocalPlayer():GetObserverTarget() != nil) and LocalPlayer():GetObserverTarget():Health() or LocalPlayer():Health())), 0 , 100)
+	self.CurHealth = math.Clamp(Lerp( 0.05, self.CurHealth, ((IsValid(player:GetObserverTarget())) and player:GetObserverTarget():Health() or player:Health())), 0 , 100)
 
 	-- Health bars
 	local x = math.Clamp(math.ceil(self.CurHealth/self.BarH), 0, 18)
@@ -120,10 +121,10 @@ function PANEL:Paint()
 	end
 
 	-- Team/Player/Spectator text
-	if !LocalPlayer():IsObserver() then
-		draw.SimpleTextOutlined(team.GetName(LocalPlayer():Team()), "FuturisticHudText", 129, self:GetTall()-45, Color(255,255,255,255), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER, 1, Color(0,0,0,255))
+	if !player:IsObserver() then
+		draw.SimpleTextOutlined(team.GetName(player:Team()), "FuturisticHudText", 129, self:GetTall()-45, Color(255,255,255,255), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER, 1, Color(0,0,0,255))
 	else
-		draw.SimpleTextOutlined(IsValid(LocalPlayer():GetObserverTarget()) and LocalPlayer():GetObserverTarget():Nick() or "ROAMING", "FuturisticHudText", 129, self:GetTall()-45, Color(255,255,255,255), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER, 1, Color(0,0,0,255))
+		draw.SimpleTextOutlined(IsValid(player:GetObserverTarget()) and player:GetObserverTarget():Nick() or "ROAMING", "FuturisticHudText", 129, self:GetTall()-45, Color(255,255,255,255), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER, 1, Color(0,0,0,255))
 	end
 
 	-- Waiting for players text
@@ -142,7 +143,7 @@ function PANEL:Paint()
 	end
 
 	-- Spectator controlls
-	if LocalPlayer():IsObserver() then
+	if player:IsObserver() then
 		draw.SimpleTextOutlined("Left click - Previous player", "Default", self:GetWide()/2, self:GetTall()-30, Color(255,255,255,255), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER, 1, Color(0,0,0,255))
 		draw.SimpleTextOutlined("Right click - Next player", "Default", self:GetWide()/2, self:GetTall()-20, Color(255,255,255,255), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER, 1, Color(0,0,0,255))
 		draw.SimpleTextOutlined("Space - Change perspective", "Default", self:GetWide()/2, self:GetTall()-10, Color(255,255,255,255), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER, 1, Color(0,0,0,255))
